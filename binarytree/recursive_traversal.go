@@ -2,29 +2,29 @@ package binarytree
 
 import "log"
 
-func PreTraversal(root *TreeNode) {
+func PreRecursiveTraversal(root *TreeNode) {
 	if root == nil {
 		return
 	}
 	log.Println(root.Value)
-	PreTraversal(root.Left)
-	PreTraversal(root.Right)
+	PreRecursiveTraversal(root.Left)
+	PreRecursiveTraversal(root.Right)
 }
 
-func InTraversal(root *TreeNode) {
+func InRecursiveTraversal(root *TreeNode) {
 	if root == nil {
 		return
 	}
-	InTraversal(root.Left)
+	InRecursiveTraversal(root.Left)
 	log.Println(root.Value)
-	InTraversal(root.Right)
+	InRecursiveTraversal(root.Right)
 }
 
-func PostTraversal(root *TreeNode) {
+func PostRecursiveTraversal(root *TreeNode) {
 	if root == nil {
 		return
 	}
-	PostTraversal(root.Left)
-	PostTraversal(root.Right)
+	PostRecursiveTraversal(root.Left)
+	PostRecursiveTraversal(root.Right)
 	log.Println(root.Value)
 }

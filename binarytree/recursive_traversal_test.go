@@ -4,15 +4,15 @@ import "testing"
 
 func TestPreTraversal(t *testing.T) {
 	root := GenBinaryTree()
-	PreTraversal(root)
+	PreRecursiveTraversal(root)
 }
 
 func TestInTraversal(t *testing.T) {
 	root := GenBinaryTree()
-	InTraversal(root)
+	InRecursiveTraversal(root)
 }
 
 func TestPostTraversal(t *testing.T) {
 	root := GenBinaryTree()
-	PostTraversal(root)
+	PostRecursiveTraversal(root)
 }
