@@ -70,11 +70,11 @@ func PostNonRecursiveTraversal(root *TreeNode) {
 }
 
 // 二叉树某个节点中序遍历的后继节点
-func GetFollowUpTreeNode(node *TreeNodeWithParent) {
+func GetSuccessorTreeNode(node *TreeNodeWithParent) {
 	if node == nil {
 		return
 	}
-	fmt.Printf("Follow-up-node: ")
+	fmt.Printf("Successor-node: ")
 	if node.Right != nil {
 		node = node.Right
 		for node.Left != nil {
@@ -85,6 +85,29 @@ func GetFollowUpTreeNode(node *TreeNodeWithParent) {
 	}
 	for node.Parent != nil {
 		if node.Parent.Left == node {
+			fmt.Printf("%d \n", node.Parent.Value)
+			return
+		}
+		node = node.Parent
+	}
+	fmt.Println("null")
+}
+
+func GetPrecursorTreeNode(node *TreeNodeWithParent) {
+	if node == nil {
+		return
+	}
+	fmt.Printf("Precursor-node: ")
+	if node.Left != nil {
+		node = node.Left
+		for node.Right != nil {
+			node = node.Right
+		}
+		fmt.Printf("%d \n", node.Value)
+		return
+	}
+	for node.Parent != nil {
+		if node.Parent.Right == node {
 			fmt.Printf("%d \n", node.Parent.Value)
 			return
 		}

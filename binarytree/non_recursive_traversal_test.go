@@ -17,7 +17,12 @@ func TestPostNonRecursiveTraversal(t *testing.T) {
 	PostNonRecursiveTraversal(root)
 }
 
-func TestGetFollowUpTreeNode(t *testing.T) {
+func TestGetSuccessorTreeNode(t *testing.T) {
 	root := GenBinaryTreeNodeWithParent()
-	GetFollowUpTreeNode(root.Left)
+	GetSuccessorTreeNode(root.Left)
+}
+
+func TestGetPrecursorTreeNode(t *testing.T) {
+	root := GenBinaryTreeNodeWithParent()
+	GetPrecursorTreeNode(root.Right.Left)
 }
