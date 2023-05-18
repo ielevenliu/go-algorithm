@@ -28,3 +28,14 @@ func PostRecursiveTraversal(root *TreeNode) {
 	PostRecursiveTraversal(root.Right)
 	log.Println(root.Value)
 }
+
+func DeserializePreRecursive(serials []string, index *int) *TreeNodeWithStr {
+	if len(serials) <= *index || serials[*index] == "#" {
+		return nil
+	}
+	root := &TreeNodeWithStr{Value: serials[*index]}
+	*index += 1
+	root.Left = DeserializePreRecursive(serials, index)
+	root.Right = DeserializePreRecursive(serials, index)
+	return root
+}

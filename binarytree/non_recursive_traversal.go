@@ -69,7 +69,7 @@ func PostNonRecursiveTraversal(root *TreeNode) {
 	}
 }
 
-// 二叉树某个节点中序遍历的后继节点
+// GetSuccessorTreeNode: 获取二叉树某个节点中序遍历的后继节点
 func GetSuccessorTreeNode(node *TreeNodeWithParent) {
 	if node == nil {
 		return
@@ -93,6 +93,7 @@ func GetSuccessorTreeNode(node *TreeNodeWithParent) {
 	fmt.Println("null")
 }
 
+// GetPrecursorTreeNode: 获取二叉树某个节点中序遍历的前驱节点
 func GetPrecursorTreeNode(node *TreeNodeWithParent) {
 	if node == nil {
 		return
@@ -114,4 +115,46 @@ func GetPrecursorTreeNode(node *TreeNodeWithParent) {
 		node = node.Parent
 	}
 	fmt.Println("null")
+}
+
+func SerializePreNonRecursive(root *TreeNodeWithStr) string {
+	if root == nil {
+		return "#!"
+	}
+	var ans string
+	nodes := []*TreeNodeWithStr{root}
+	for len(nodes) != 0 {
+		node := nodes[len(nodes)-1]
+		nodes = nodes[:len(nodes)-1]
+		if node == nil {
+			ans += "#!"
+			continue
+		}
+		ans += node.Value + "!"
+		nodes = append(nodes, node.Right)
+		nodes = append(nodes, node.Left)
+	}
+	return ans
+}
+
+// todo
+func DeserializePreNonRecursive(serial string) *TreeNodeWithStr {
+	root := &TreeNodeWithStr{}
+
+	return root
+}
+
+// todo
+func TraversalByLevel(root *TreeNode) {
+
+}
+
+// todo
+func IsBalanceBinaryTree(root *TreeNode) {
+
+}
+
+// todo :中序遍历是小-大
+func IsSearchBinaryTree(root *TreeNode) {
+
 }

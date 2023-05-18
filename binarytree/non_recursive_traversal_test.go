@@ -18,11 +18,17 @@ func TestPostNonRecursiveTraversal(t *testing.T) {
 }
 
 func TestGetSuccessorTreeNode(t *testing.T) {
-	root := GenBinaryTreeNodeWithParent()
+	root := GenBinaryTreeWithParent()
 	GetSuccessorTreeNode(root.Left)
 }
 
 func TestGetPrecursorTreeNode(t *testing.T) {
-	root := GenBinaryTreeNodeWithParent()
+	root := GenBinaryTreeWithParent()
 	GetPrecursorTreeNode(root.Right.Left)
+}
+
+func TestSerializePreNonRecursive(t *testing.T) {
+	root := GenBinaryTreeWithStr()
+	ans := SerializePreNonRecursive(root)
+	t.Logf("%s", ans)
 }
