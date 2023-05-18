@@ -40,17 +40,17 @@ func MergeSortRecursive(arr []int) {
 	if len(arr) < 2 {
 		return
 	}
-	mergeSortRecursive(arr, 0, len(arr)-1)
+	mergeSortProcess(arr, 0, len(arr)-1)
 }
 
-func mergeSortRecursive(arr []int, l, r int) {
+func mergeSortProcess(arr []int, l, r int) {
 	if l == r {
 		return
 	}
-	// 防止l+r数据过大
+	// 防止l+r数据过大溢出
 	mid := l + ((r - l) >> 2)
-	mergeSortRecursive(arr, l, mid)
-	mergeSortRecursive(arr, mid+1, r)
+	mergeSortProcess(arr, l, mid)
+	mergeSortProcess(arr, mid+1, r)
 	merge(arr, l, mid, r)
 }
 
