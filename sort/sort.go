@@ -40,7 +40,7 @@ func InsertionSort(arr []int) {
 	}
 }
 
-// MergeSortRecursive: 归并排序时间复杂度T(N) = 2T(N/2) + O(N) => O(N*logN)
+// MergeSortRecursive: 归并排序时间复杂度T(N) = 2T(N/2) + O(N) => O(N*logN); 额外空间复杂度O(N)
 func MergeSortRecursive(arr []int) {
 	if len(arr) < 2 {
 		return
@@ -89,7 +89,7 @@ func MergeSortNonRecursive() {
 
 }
 
-// QuickSort: 随机快排长期期望的时间复杂度T(N) = 2T(N/2) + O(N) => O(N*logN)
+// QuickSort: 随机快排长期期望的时间复杂度T(N) = 2T(N/2) + O(N) => O(N*logN); 额外空间复杂度O(logN)
 func QuickSort(arr []int) {
 	if len(arr) < 2 {
 		return
@@ -125,4 +125,14 @@ func partition(arr []int, l, r int) (int, int) {
 	}
 	arr[r], arr[more] = arr[more], arr[r]
 	return less + 1, more
+}
+
+// todo
+func QuickSortNonRecursive(arr []int) {
+
+}
+
+// HeapSort: 
+func HeapSort(arr []int) {
+
 }
