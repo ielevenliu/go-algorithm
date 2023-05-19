@@ -43,3 +43,38 @@ func ReverseOrderPair() {
  1. 给定一个数组arr和一个数num，把小于等于num的数放在左边，大于num的数放在数组右边；额外空间复杂度O(1)，时间复杂度O(N)
  2. 荷兰国旗问题，给定一个数组arr和一个数num，把小于num的数放在左边，等于num的数放中间，大于num的数放在数组右边；额外空间复杂度O(1)，时间复杂度O(N)
 */
+
+func SimplePartition(arr []int, l, r, num int) {
+	if len(arr) <= 1 || l >= r {
+		return
+	}
+	less := l - 1
+	for ; l <= r; l++ {
+		if arr[l] <= num {
+			arr[less+1], arr[l] = arr[l], arr[less+1]
+			less++
+		}
+	}
+}
+
+// 荷兰国旗问题
+// 当前位置的数小于num，当前位置和less+1位置交换，当前位置+1;
+// 当前位置的数等于num，当前位置+1;
+// 当前位置的数大于num，当前位置和more-1位置交换，当前位置不变
+func HollandFlag(arr []int, l, r, num int) {
+	if len(arr) <= 1 || l >= r {
+		return
+	}
+	less, more := l-1, r+1
+	for l < more {
+		if arr[l] < num {
+			arr[less+1], arr[l] = arr[l], arr[less+1]
+			less++
+		} else if arr[l] > num {
+			arr[more-1], arr[l] = arr[l], arr[more-1]
+			more--
+			continue
+		}
+		l++
+	}
+}

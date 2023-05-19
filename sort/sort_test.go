@@ -33,3 +33,11 @@ func TestMergeSort(t *testing.T) {
 	MergeSortRecursive(arr)
 	t.Logf("MergeSort arr: %+v", arr)
 }
+
+func TestQuickSort(t *testing.T) {
+	arr := []int{7, 3, 6, 5, 1}
+	t.Logf("Original arr: %+v", arr)
+
+	QuickSort(arr)
+	t.Logf("QuickSort arr: %+v", arr)
+}

@@ -1,5 +1,10 @@
 package sort
 
+import (
+	"math/rand"
+	"time"
+)
+
 // BubbleSort: 冒泡排序时间复杂度O(N^2)
 func BubbleSort(arr []int) {
 	for end := len(arr) - 1; end > 0; end-- {
@@ -82,4 +87,42 @@ func merge(arr []int, l, mid, r int) {
 // todo
 func MergeSortNonRecursive() {
 
+}
+
+// QuickSort: 随机快排长期期望的时间复杂度T(N) = 2T(N/2) + O(N) => O(N*logN)
+func QuickSort(arr []int) {
+	if len(arr) < 2 {
+		return
+	}
+	quickSortProcess(arr, 0, len(arr)-1)
+}
+
+func quickSortProcess(arr []int, l, r int) {
+	if l >= r {
+		return
+	}
+	// 随机一个索引位置用做partition对比，相较于经典快排直接用最后一个数而言，屏蔽了与数据状况[4,3,2,1]的相关性
+	rand.Seed(time.Now().UnixNano())
+	swapIdx := rand.Intn(r-l) + l
+	arr[swapIdx], arr[r] = arr[r], arr[swapIdx]
+	less, more := partition(arr, l, r)
+	quickSortProcess(arr, l, less-1)
+	quickSortProcess(arr, more+1, r)
+}
+
+func partition(arr []int, l, r int) (int, int) {
+	less, more := l-1, r
+	for l < more {
+		if arr[l] < arr[r] {
+			arr[less+1], arr[l] = arr[l], arr[less+1]
+			less++
+		} else if arr[l] > arr[r] {
+			arr[more-1], arr[l] = arr[l], arr[more-1]
+			more--
+			continue
+		}
+		l++
+	}
+	arr[r], arr[more] = arr[more], arr[r]
+	return less + 1, more
 }
