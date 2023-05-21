@@ -132,7 +132,7 @@ func QuickSortNonRecursive(arr []int) {
 
 }
 
-// HeapSort: 
+// HeapSort:
 func HeapSort(arr []int) {
 
 }
