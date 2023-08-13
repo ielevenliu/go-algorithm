@@ -42,7 +42,7 @@ func InsertionSort(arr []int) {
 
 // MergeSortRecursive: 归并排序时间复杂度T(N) = 2T(N/2) + O(N) => O(N*logN); 额外空间复杂度O(N)
 func MergeSortRecursive(arr []int) {
-	if len(arr) < 2 {
+	if len(arr) <= 1 {
 		return
 	}
 	mergeSortProcess(arr, 0, len(arr)-1)
@@ -53,7 +53,7 @@ func mergeSortProcess(arr []int, l, r int) {
 		return
 	}
 	// 防止l+r数据过大溢出
-	mid := l + ((r - l) >> 2)
+	mid := l + (r-l)/2
 	mergeSortProcess(arr, l, mid)
 	mergeSortProcess(arr, mid+1, r)
 	merge(arr, l, mid, r)
@@ -71,13 +71,11 @@ func merge(arr []int, l, mid, r int) {
 			idxR++
 		}
 	}
-	for idxL <= mid {
-		tmp = append(tmp, arr[idxL])
-		idxL++
+	if idxL <= mid {
+		tmp = append(tmp, arr[idxL:mid+1]...)
 	}
-	for idxR <= r {
-		tmp = append(tmp, arr[idxR])
-		idxR++
+	if idxR <= r {
+		tmp = append(tmp, arr[idxR:r+1]...)
 	}
 	for idx := range tmp {
 		arr[l+idx] = tmp[idx]
@@ -130,6 +128,7 @@ func swap(arr []int, i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 
+// QuickSortNonRecursive：非递归快排，用栈存储边界
 func QuickSortNonRecursive(arr []int) {
 	if len(arr) <= 1 {
 		return
