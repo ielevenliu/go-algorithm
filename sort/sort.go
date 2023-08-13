@@ -130,9 +130,28 @@ func swap(arr []int, i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 
-// todo
 func QuickSortNonRecursive(arr []int) {
+	if len(arr) <= 1 {
+		return
+	}
+	tmp := []int{len(arr) - 1, 0}
+	for len(tmp) != 0 {
+		l := pop(&tmp)
+		r := pop(&tmp)
+		less, more := partition(arr, l, r)
+		if more < r {
+			tmp = append(tmp, r, more)
+		}
+		if less > l {
+			tmp = append(tmp, less, l)
+		}
+	}
+}
 
+func pop(nums *[]int) int {
+	res := (*nums)[len(*nums)-1]
+	*nums = (*nums)[:len(*nums)-1]
+	return res
 }
 
 // HeapSort:
