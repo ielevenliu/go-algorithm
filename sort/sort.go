@@ -153,7 +153,38 @@ func pop(nums *[]int) int {
 	return res
 }
 
-// HeapSort:
+// HeapSort:时间复杂度 O(N*logN)，空间复杂度 O(1)
 func HeapSort(arr []int) {
+	if len(arr) <= 0 {
+		return
+	}
+	for idx := range arr {
+		heapInsert(arr, idx)
+	}
+	for heapSize := len(arr) - 1; heapSize > 0; heapSize-- {
+		swap(arr, 0, heapSize)
+		heapify(arr, 0, heapSize-1)
+	}
+}
 
+func heapInsert(arr []int, index int) {
+	for arr[index] > arr[(index-1)/2] {
+		swap(arr, index, (index-1)/2)
+		index = (index - 1) / 2
+	}
+}
+
+func heapify(arr []int, index, heapSize int) {
+	left := index*2 + 1
+	for left <= heapSize {
+		largest := left
+		if left+1 <= heapSize && arr[left] < arr[left+1] {
+			largest = left + 1
+		}
+		if arr[index] >= arr[largest] {
+			break
+		}
+		swap(arr, index, largest)
+		index, left = largest, largest*2+1
+	}
 }

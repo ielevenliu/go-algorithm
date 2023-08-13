@@ -49,3 +49,11 @@ func TestQuickSortNonRecursive(t *testing.T) {
 	QuickSortNonRecursive(arr)
 	t.Logf("QuickSortNonRecursive: %+v", arr)
 }
+
+func TestHeapSort(t *testing.T) {
+	arr := []int{7, 3, 6, 5, 1}
+	t.Logf("Original arr: %+v", arr)
+
+	HeapSort(arr)
+	t.Logf("HeapSort: %+v", arr)
+}
