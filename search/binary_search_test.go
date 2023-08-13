@@ -2,26 +2,23 @@ package search
 
 import "testing"
 
-func TestTraversalSearch(t *testing.T) {
-	a := []int{1, 2, 3, 4, 5, 6}
-	b := []int{8, 9, 2, 3}
+func TestBinarySearchTarget(t *testing.T) {
+	nums := []int{-1, 0, 3, 5, 9, 12}
 
-	ans := TraversalSearch(a, b)
-	t.Logf("TraversalSearch ans: %+v", ans)
+	idx := BinarySearchTarget(nums, 9)
+	t.Logf("Index: %d", idx)
 }
 
-func TestBinarySearch(t *testing.T) {
-	a := []int{1, 2, 3, 4, 5, 6}
-	b := []int{8, 9, 2, 3}
+func TestBinarySearchLeftEdge(t *testing.T) {
+	nums := []int{-1, 1, 9, 9, 9, 12}
 
-	ans := BinarySearch(a, b)
-	t.Logf("BinarySearch ans: %+v", ans)
+	idx := BinarySearchLeftEdge(nums, 9)
+	t.Logf("Index: %d", idx)
 }
 
-func TestSortSearch(t *testing.T) {
-	a := []int{1, 2, 3, 4, 5, 6}
-	b := []int{8, 9, 2, 3}
+func TestBinarySearchRightEdge(t *testing.T) {
+	nums := []int{5, 7, 7, 8, 8, 10}
 
-	ans := SortSearch(a, b)
-	t.Logf("SortSearch ans: %+v", ans)
+	idx := BinarySearchRightEdge(nums, 6)
+	t.Logf("Index: %d", idx)
 }

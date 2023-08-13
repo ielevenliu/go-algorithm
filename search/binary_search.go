@@ -1,81 +1,56 @@
 package search
 
-import "sort"
-
-/*
-Question: 有序数组a长度为N，无序数组b长度为M，找出b中不在a中的元素
-*/
-
-// TraversalSearch: 时间复杂度O(N*M)
-func TraversalSearch(a, b []int) []int {
-	if len(a) == 0 || len(b) == 0 {
-		return b
-	}
-
-	ans := []int{}
-	for _, elemB := range b {
-		flag := false
-		for _, elemA := range a {
-			if elemB == elemA {
-				flag = true
-				break
-			}
-		}
-		if !flag {
-			ans = append(ans, elemB)
-		}
-	}
-	return ans
-}
-
-// BinarySearch: 时间复杂度O(N*logM)，以2为底
-func BinarySearch(a, b []int) []int {
-	if len(a) == 0 || len(b) == 0 {
-		return b
-	}
-
-	ans := []int{}
-	for _, elemB := range b {
-		lowIdx := 0
-		highIdx := len(a) - 1
-		for lowIdx <= highIdx {
-			midIdx := (lowIdx + highIdx) / 2
-			if a[midIdx] < elemB {
-				lowIdx = midIdx + 1
-			} else if a[midIdx] > elemB {
-				highIdx = midIdx - 1
-			} else {
-				break
-			}
-		}
-		if lowIdx > highIdx {
-			ans = append(ans, elemB)
-		}
-	}
-	return ans
-}
-
-// SortSearch: 时间复杂度O(M*logM)+O(N+M)，以2为底
-func SortSearch(a, b []int) []int {
-	if len(a) == 0 || len(b) == 0 {
-		return b
-	}
-
-	ans := []int{}
-	sort.Ints(b)
-	var idxA, idxB int
-	for idxA < len(a) && idxB < len(b) {
-		if a[idxA] < b[idxB] {
-			idxA++
-		} else if a[idxA] > b[idxB] {
-			ans = append(ans, b[idxB])
-			idxB++
+// 寻找一个数
+func BinarySearchTarget(arr []int, target int) int {
+	left, right := 0, len(arr)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if arr[mid] == target {
+			return mid
+		} else if arr[mid] < target {
+			left = mid + 1
 		} else {
-			idxB++
+			right = mid - 1
 		}
 	}
-	for ; idxB < len(b); idxB++ {
-		ans = append(ans, b[idxB])
+	return -1
+}
+
+// 寻找左边界
+// 循环终止条件是 left = right + 1，即 right = mid-1 后来到了target值的左边left位置为target
+func BinarySearchLeftEdge(arr []int, target int) int {
+	left, right := 0, len(arr)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if arr[mid] == target {
+			right = mid - 1
+		} else if arr[mid] < target {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
 	}
-	return ans
+	if len(arr) == 0 || arr[left] != target {
+		return -1
+	}
+	return left
+}
+
+// 寻找右边界
+func BinarySearchRightEdge(arr []int, target int) int {
+	left, right := 0, len(arr)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if arr[mid] == target {
+			left = mid + 1
+		} else if arr[mid] < target {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
+	}
+	if len(arr) == 0 || arr[right] != target {
+		return -1
+	}
+	return right
 }
